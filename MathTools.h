@@ -2809,7 +2809,7 @@ public:
 		tempConstructCodes.add_NewNode(ValidationLetter_ConstructCode("()+*-/^#", 0));
 		ValidationWord nonVariableTerm(tempConstructCodes);
 
-		FileValidation_WordGroup workingCopy;
+		WordGroup workingCopy;
 		UniformNode<Word> *wordNode = workingCopy.add_NewNode();
 		wordNode->content = aWrittenForm;
 
@@ -2852,7 +2852,7 @@ public:
 			{
 
 				//test for constant
-				if (workingCopy.validateWordNode_FloatingPoint_Unlimited(
+				if (workingCopy.validateNode_FloatingPoint_Unlimited(
 					wordNode, constantValue, true, false))
 				{
 
@@ -2871,8 +2871,8 @@ public:
 				}
 
 				//test for variable
-				else if (workingCopy.validateWordNode_AlphaNumeric(wordNode, false, false)
-					|| workingCopy.validateWordNode_AlphaNumericIndexed(wordNode, false, false))
+				else if (workingCopy.validateNode_AlphaNumeric(wordNode, false, false)
+					|| workingCopy.validateNode_IndexedAlphaNumeric(wordNode, false, false))
 				{
 
 					//test whether the found variable is in the initializedVariables
@@ -2915,7 +2915,7 @@ public:
 				}
 
 				//test for parenthetical start
-				else if (workingCopy.validateWordNode_MatchesWord(
+				else if (workingCopy.validateNode_MatchesWord(
 					leftParenthesis, wordNode))
 				{
 
@@ -2928,7 +2928,7 @@ public:
 				}
 
 				//test for any preceeding negative unary operand
-				else if (workingCopy.validateWordNode_MatchesWord(
+				else if (workingCopy.validateNode_MatchesWord(
 					minus, wordNode))
 				{
 
@@ -2950,7 +2950,7 @@ public:
 			{
 
 				//test for plus
-				if (workingCopy.validateWordNode_MatchesWord(plus, wordNode))
+				if (workingCopy.validateNode_MatchesWord(plus, wordNode))
 				{
 
 					//if currentParent is a distributive sequence, move up one level
@@ -2963,7 +2963,7 @@ public:
 				}
 
 				//test for minus
-				else if (workingCopy.validateWordNode_MatchesWord(minus, wordNode))
+				else if (workingCopy.validateNode_MatchesWord(minus, wordNode))
 				{
 
 					//if currentParent is a distributive sequence, move up one level
@@ -2976,7 +2976,7 @@ public:
 				}
 
 				//test for multiply
-				else if (workingCopy.validateWordNode_MatchesWord(multiply, wordNode))
+				else if (workingCopy.validateNode_MatchesWord(multiply, wordNode))
 				{
 
 					if (currentParent)
@@ -3030,7 +3030,7 @@ public:
 				}
 
 				//test for divide
-				else if (workingCopy.validateWordNode_MatchesWord(divide, wordNode))
+				else if (workingCopy.validateNode_MatchesWord(divide, wordNode))
 				{
 
 					if (currentParent)
@@ -3084,7 +3084,7 @@ public:
 				}
 
 				//test for exponent (and apply to most recent node added)
-				else if (workingCopy.validateWordNode_MatchesWord(
+				else if (workingCopy.validateNode_MatchesWord(
 					exponent, wordNode))
 				{
 
@@ -3124,7 +3124,7 @@ public:
 				}
 
 				//test for root (and apply to most recent node added)
-				else if (workingCopy.validateWordNode_MatchesWord(
+				else if (workingCopy.validateNode_MatchesWord(
 					root, wordNode))
 				{
 
@@ -3164,7 +3164,7 @@ public:
 				}
 
 				//test for parenthetical end
-				else if (workingCopy.validateWordNode_MatchesWord(
+				else if (workingCopy.validateNode_MatchesWord(
 					rightParenthesis, wordNode, true, false) && unmatchedParentheses > 0)
 				{
 
